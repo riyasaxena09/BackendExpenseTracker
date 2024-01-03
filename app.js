@@ -2,15 +2,15 @@ const express=require('express')
 const path=require('path')
 const parser=require('body-parser')
 const app=express()
+const data=require('./controllers/usercontroller')
 app.use(parser.urlencoded({extended:true}))
+app.set('view engine','ejs')
 app.get('/',(req,res,next)=>{
     console.log(__dirname)
-    res.sendFile(path.join(__dirname,'views','signup.html'))
+    // res.sendFile(path.join(__dirname,'views','signup.html'))
+    res.render('signup', { error: '' })
 })
-app.post('/sign',(req,res,next)=>{
-    console.log(req.body)
-   
-})
+app.post('/sign',data.crudoper)
 app.listen('3000',()=>{
     console.log('done')
 })
